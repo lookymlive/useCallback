@@ -1,50 +1,51 @@
-# React + TypeScript + Vite
+Project description
+Installation steps
+Example usage of useCallback
+Code explanation
+Benefits of using useCallback
+Running instructions
+Usage Example
+The PhoneBook component uses useCallback to memoize the makeCall function:
+# PhoneBook Component with useCallback Example
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+This project demonstrates the usage of React's `useCallback` hook in a PhoneBook component to optimize performance by memoizing callback functions.
 
-Currently, two official plugins are available:
+## Installation
+```bash
+npm install
+npm run dev
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Usage Example
+The PhoneBook component uses useCallback to memoize the makeCall function:
+const makeCall = useCallback((name: string) => setLog(`Llamando al ${name}`), [])
+Code Explanation
+The useCallback hook is used to prevent unnecessary re-renders by:
 
-## Expanding the ESLint configuration
+Memoizing the makeCall function
+Only recreating the function when dependencies change (empty array means never recreate)
+// Example implementation
+import { useCallback, useState } from 'react'
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+export const PhoneBook = () => {
+  const [contacts, setContacts] = useState([...])
+  const [log, setLog] = useState<string>('')
+  
+  // makeCall function is memoized and only created once
+  const makeCall = useCallback((name: string) => {
+    setLog(`Llamando al ${name}`)
+  }, [])
+  
+  // ... rest of component
+}
+Benefits
+Prevents unnecessary re-renders of child components
+Optimizes performance for components that rely on callback functions
+Maintains referential equality between renders
+Running the Project
+Clone the repository
+Install dependencies: npm install
+Run development server: npm run dev
+Open browser at: http://localhost:5173
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+ok, Thank you lookymlive@gmail.com for your contribution to this project.
